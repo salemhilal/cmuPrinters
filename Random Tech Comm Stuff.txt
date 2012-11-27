@@ -1,0 +1,65 @@
+Topic
+Plan
+Benefits
+Approach - Methodology
+Approach - Schedule
+Qualifications
+
+
+_________________________________________
+
+Topic = better printer status/location thing for CMU
+
+Plan
+
+Benefits = 
+	better/cleaner interface for determining status 
+	map for determining closest printers
+	link to andrewID for seeing your print queue and times remaining
+
+Plan =
+	-Facebook communication
+	-Using github
+	-Weekly in person meetings
+	-more as we approach deadline
+	-
+	
+Approach Methdology =
+	-organize with github
+	-use javascript, css, html, etc.
+	-use CMU APIs
+	-gantto.com for gantt chart
+	
+Approach Schedule =
+	-see gantt chart
+	
+Qualifications
+
+Craig
+	Sophomore Chemistry Major
+	15-122
+	1 semester of discrete math (Concepts)
+	Internship with MATLAB
+	
+Alec
+	Senior CS 
+	15-213, 15-312, 451... 4 years of CS
+	Ureach.com
+	
+Salem
+	Sophomore CS
+	15-210, 15-251....
+	Internship at Yammer (backend and front end stuff)
+	
+Mitchell
+	Sophomore CS
+	15-210, 15-251...
+	Internship at Applied Technical Systems (server side JS, some front end)
+	
+	
+	
+WHY
+	1. helps fellow students
+	2. learn web development
+	3. more experience with front end
+	
