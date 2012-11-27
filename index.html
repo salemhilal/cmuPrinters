@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div class="content">
+        
+    </div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.xdomain.js"></script>
+    <script>
+    var bodyText = [];
+        $(document).ready(function(){
+
+            console.log("start");
+            $.get("http://clusters.andrew.cmu.edu/printerstats/", function(data){
+                console.log(data.responseText);
+                bodyText = $(data.responseText);
+                console.log(bodyText);
+                $(".content").html(bodyText[9]);
+            })
+        });
+    </script>
+</body>
+</html>
