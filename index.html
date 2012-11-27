@@ -12,17 +12,46 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.xdomain.js"></script>
     <script>
-    var bodyText = [];
         $(document).ready(function(){
 
-            console.log("start");
+            console.log("Data received:");
             $.get("http://clusters.andrew.cmu.edu/printerstats/", function(data){
-                console.log(data.responseText);
-                bodyText = $(data.responseText);
-                console.log(bodyText);
+                var bodyText = $(data.responseText);
+
+                alert("Check the console for the printer data.");
+                console.log(tableToObject(bodyText));
+
                 $(".content").html(bodyText[9]);
-            })
+            });
+
+
         });
+
+
+        function tableToObject(table){
+            var result = {};
+            var oddRows  = $(table).find(".epi-rowOdd");
+            var evenRows = $(table).find(".epi-rowEven");
+
+            function parseRow(i,e){
+                var fields    = $(e).find("td");
+                var name      = $($(fields)[0]).find("p").html();
+                var lcd       = $($(fields)[2]).find("p").html();
+                var status    = $($(fields)[3]).find("p").html();
+                var timestamp = $($(fields)[5]).find("p").html();
+
+                result[name] = {
+                    lcd: lcd,
+                    status: status,
+                    timestamp: timestamp
+                }
+            }
+
+            $(oddRows).each(parseRow);
+            $(evenRows).each(parseRow);
+            return result;
+        }
+
     </script>
 </body>
 </html>
