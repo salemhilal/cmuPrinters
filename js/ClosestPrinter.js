@@ -18,7 +18,7 @@ var ClosestPrinter = function (Printers, PrintUtil) {
     var that = this;
 
 	/*
-	 * getClosestPrintersByClick(n, x, y) will return the n closest printers to the pixel (x,y) from the image/map.
+	 * getClosestPrintersByClick(n, lat, long) will return the n closest printers to the latitude and longitude from the map.
 	 * These n printers will be returned in an array sorted from closest to furthest.
 	 *
 	 * If n is greater than the number of printers, then minP will eventually exit the inner loop as undefined and
@@ -27,17 +27,11 @@ var ClosestPrinter = function (Printers, PrintUtil) {
 	 * Possible TODO:
 	 *		-May only want to add printers to the array if their status is good (your call/handling on this one)
 	*/
-	this.getClosestPrintersByClick = function (numToGet, clickX, clickY) {
-		var curDist,
-		    curP,
-			minP,
-			minPs = [],
-		    minDist = 1000000.0;
-	
+	this.getClosestPrinterByGPS = function (numToGet, gpsLat, gpsLong) {
 		for(var i = 0; i < numToGet; i++) {
 			for(var printer in Printers) {
 				curP = Printers[printer];
-				curDist = Math.sqrt(Math.abs(clickX - curP.xcoord) + Math.abs(clickY - curP.ycoord));
+				curDist = Math.sqrt(Math.pow(Math.abs(gpsLat - curP.latitude), 2) + Math.pow(Math.abs(gpsLong - curP.longitude), 2));
 				if(curDist <= minDist && !minPs.contains(curP)) {
 					minDist = curDist;
 					minP = curP;
@@ -51,16 +45,6 @@ var ClosestPrinter = function (Printers, PrintUtil) {
 		}
 		
 		return minPs;
-	}
-	
-	/*
-	 * This function handles GPS coordinate input by converting the longitude to the scaled x-coordinate for the image
-	 * and by converting the latitude to the scaled y-coordinate for the image.  Then it just calls the getClosestPrintersByClick
-	 * function on those inputs.
-	 *
-	*/
-	this.getClosestPrinterByGPS = function (numToGet, gpsLat, gpsLong) {
-		return that.getClosestPrintersByClick(numToGet, PrintUtil.longToX(gpsLong), PrintUtil.latToY(gpsLat));
 	}
 	
 	return that;

@@ -1,7 +1,4 @@
 /*
- * NOTE: YOU MUST FILL IN THE FOLLOWING:
- * 		imgWidth, imgHeight, topLat, leftLong, botLat, rightLong
- *
  * This module handles creating the object-hash of printers for use by other modules. It holds the GPS
  * coordinates of the printers as well as info specific to the chosen map/image.
  *
@@ -11,25 +8,6 @@
 var PrinterUtil = function () {
 	var 
 	    that = this,
-
-		//The dimensions of the map/image
-		imgWidth = 0,
-		imgHeight = 0,
-		
-		//The latitude corresponding to the top edge of the map/image
-		topLat = 0,
-		
-		//The longitude corresponding to the left edge of the map/image
-		leftLong = 0,
-		
-		//The latitude corresponding to the bottom edge of the map/image
-		botLat = 0,
-		
-		//The longitude corresponding to the right edge of the map/image
-		rightLong = 0,
-		
-		latDiff = Math.abs(topLat - botLat),
-		longDiff = Math.abs(rightLong - leftLong),
 	
 		//The object-hash relating printer names to their latitude and longitude
 		GPSTable = 
@@ -65,7 +43,7 @@ var PrinterUtil = function () {
 	/*
 	 * This is basically that function you wrote to put the printer data into an object earlier.
 	 * You need to pass it in the same table as you did before (with the printer data), and the only
-	 * differences now are the 4 new properties each printer gets assigned (latitude, longitude, xcoord, ycoord)
+	 * differences now are the 2 new properties each printer gets assigned (latitude, longitude)
 	 *
 	 * Also different is that printers will only get added if they are found in the GPSTable above (since we omitted some)
 	 *
@@ -89,43 +67,11 @@ var PrinterUtil = function () {
 					timestamp: timestamp,
 					latitude: GPSTable[name].latitude,
 					longitude: GPSTable[printer].longitude,
-					xcoord: that.longToX(GPSTable[printer].longitude),
-					ycoord: that.latToY(GPSTable[printer].latitude)
 				};
         }
 		
         return printers;
     }
-
-	/*
-	 * Given a longitude, returns a valid x-coordinate into the map/image based on simple proportions
-	 * of the known longitude bounds of the image and the width of the image.  Also handles if longitude
-	 * is out of range.
-	*/
-	this.longToX = function (longitude) {
-		if(longitude > rightLong)
-			return imgWidth - 1;
-		if(longitude < leftLong)
-			return 0;
-			
-		var percent = (longitude - leftLong) / longDiff;
-		return percent * imgWidth;
-	}
-	
-	/*
-	 * Given a latitude, returns a valid y-coordinate into the map/image based on simple proportions
-	 * of the known latitude bounds of the image and the height of the image.  Also handles if latitude
-	 * is out of range.
-	*/
-	this.latToY = function (latitude) {
-		if(latitude > topLat)
-			return 0;
-		if(latitude < botLat)
-			return imgHeight - 1;
-			
-		var percent = (latitude - minLat) / latDiff;
-		return percent * imgHeight;
-	}
 	
 	return that;
 }
