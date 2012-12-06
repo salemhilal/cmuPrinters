@@ -74,6 +74,7 @@
       <div class="jumbotron">
         <h1>Where are you?</h1>
         <p class="lead">Click or tap on your location on the map.</p>
+        <p class="lead">Drag to move around the map.</p>
         <!--img src="img/map.png" class="img-rounded"></img-->
         <div id="cmuMap" style="width: 100%; height: 375px;"></div> 
         <br />
@@ -110,16 +111,31 @@
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDG2T7EFLq_lT1Vq7TZ7uwPHNh6J-q2FOw&sensor=false"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.xdomain.js"></script>
+    <script type="text/javascript" src="js/ClosestPrinter.js"></script>
+    <script type="text/javascript" src="js/PrinterUtil.js"></script>
     <script>
 
         var resizemap = function(){};
+
         $(document).ready(function(){
 
-            console.log("Data received:");
             $.get("http://clusters.andrew.cmu.edu/printerstats/", function(data){
                 var bodyText = $(data.responseText);
 
-                console.log(tableToObject(bodyText));
+                data = PrinterUtil.getPrinters(bodyText);
+                console.log(data); 
+
+                google.maps.event.addListener(cmuMap, 'click', function(event) {
+                    console.log('Point.X.Y: ' + event.latLng);
+                    console.log(event);
+                    console.log(event.latLng);
+                    var lat = event.latLng["$a"];
+                    var lng = event.latLng["ab"];
+
+                    console.log(getClosest(data, 3, lat, lng));
+                });
+
+
             });
 
             var options = {
@@ -130,14 +146,10 @@
 
             var cmuMap = new google.maps.Map(document.getElementById('cmuMap'), options);
 
-            google.maps.event.addListener(cmuMap, 'click', function(event) {
-              alert('Point.X.Y: ' + event.latLng);
-            });
 
-            console.log(cmuMap);
 
             //Re-size the map.
-            resizeMap = function resizeMap(){
+            resizeMap = function (){
                 google.maps.event.trigger(cmuMap,'resize');
                 cmuMap.setZoom( cmuMap.getZoom() );
                 console.log(cmuMap.getZoom());
@@ -168,6 +180,27 @@
             $(oddRows).each(parseRow);
             $(evenRows).each(parseRow);
             return result;
+        }
+
+        function getClosest(Printers, numToGet, gpsLat, gpsLong) {
+            var minDist = Infinity;
+            for(var i = 0; i < numToGet; i++) {
+                for(var printer in Printers) {
+                    curP = Printers[printer];
+                    curDist = Math.sqrt(Math.pow(Math.abs(gpsLat - curP.latitude), 2) + Math.pow(Math.abs(gpsLong - curP.longitude), 2));
+                    if(curDist <= minDist && !minPs.contains(curP)) {
+                        minDist = curDist;
+                        minP = curP;
+                    }
+                }
+                if(minP)
+                    minPs[i] = minP;
+                else return minPs;
+                minDist = 1000000.0;
+                minP = undefined;
+            }
+            
+            return minPs;
         }
 
 

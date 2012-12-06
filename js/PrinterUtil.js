@@ -5,9 +5,8 @@
  * Also, the other modules (such as ClosestPrinter) may make use of the latitude and longitude conversion functions. 
  *
 */
-var PrinterUtil = function () {
-	var 
-	    that = this,
+var PrinterUtil = (function () {
+	var exports = {};
 	
 		//The object-hash relating printer names to their latitude and longitude
 		GPSTable = 
@@ -49,8 +48,10 @@ var PrinterUtil = function () {
 	 *
 	 * The object-hash of printers is returned
 	*/
-	this.getPrinters = function (table) {
+	exports.getPrinters = function (table) {
         var printers = {};
+        var oddRows  = $(table).find(".epi-rowOdd");
+        var evenRows = $(table).find(".epi-rowEven");
 
         function parseRow(i,e){
             var fields    = $(e).find("td");
@@ -59,19 +60,22 @@ var PrinterUtil = function () {
             var status    = $($(fields)[3]).find("p").html();
             var timestamp = $($(fields)[5]).find("p").html();
 
-			if(GPSTable[name]) 
+			if(GPSTable[name]) {
 				printers[name] = 
 				{
 					lcd: lcd,
 					status: status,
 					timestamp: timestamp,
 					latitude: GPSTable[name].latitude,
-					longitude: GPSTable[printer].longitude,
+					longitude: GPSTable[name].longitude,
 				};
+			}
         }
-		
+        
+        $(oddRows).each(parseRow);
+        $(evenRows).each(parseRow);
         return printers;
     }
 	
-	return that;
-}
+	return exports;
+})();
