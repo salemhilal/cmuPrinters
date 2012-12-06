@@ -63,6 +63,7 @@ var PrinterUtil = (function () {
 			if(GPSTable[name]) {
 				printers[name] = 
 				{
+					name: name,
 					lcd: lcd,
 					status: status,
 					timestamp: timestamp,

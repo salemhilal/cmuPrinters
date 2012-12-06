@@ -111,7 +111,6 @@
     <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDG2T7EFLq_lT1Vq7TZ7uwPHNh6J-q2FOw&sensor=false"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/jquery.xdomain.js"></script>
-    <script type="text/javascript" src="js/ClosestPrinter.js"></script>
     <script type="text/javascript" src="js/PrinterUtil.js"></script>
     <script>
 
@@ -182,8 +181,17 @@
             return result;
         }
 
+        Array.prototype.contains = function ( query ) {
+           for (i in this) {
+               if (this[i] == query) return true;
+           }
+           return false;
+        }
+
         function getClosest(Printers, numToGet, gpsLat, gpsLong) {
             var minDist = Infinity;
+            var minP = undefined;
+            var minPs = [];
             for(var i = 0; i < numToGet; i++) {
                 for(var printer in Printers) {
                     curP = Printers[printer];
