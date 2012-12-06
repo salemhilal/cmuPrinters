@@ -1,9 +1,9 @@
 function cmuPrinters(table){
     this.table = table;
-    this.printers = this.getPrinters(table);
+    this.printers = this._getPrinters(table);
 }
 
-cmuPrinters.prototype.gpsTable = {
+cmuPrinters.prototype._gpsTable = {
     "prn-hou-donner-1": {latitude : 40.441838, longitude : -79.940193},
     "prn-cs-ghc3-1": {latitude : 40.443538, longitude : -79.944625},
     "prn-cs-ghc5-1": {latitude : 40.443305, longitude : -79.94456},
@@ -32,7 +32,7 @@ cmuPrinters.prototype.gpsTable = {
     "prn-cl-more-1" : {latitude : 40.445155, longitude : -79.943375}
 };
 
-cmuPrinters.prototype.getPrinters = function (table) {
+cmuPrinters.prototype._getPrinters = function (table) {
     var printers = {};
     var oddRows  = $(table).find(".epi-rowOdd");
     var evenRows = $(table).find(".epi-rowEven");
@@ -46,15 +46,15 @@ cmuPrinters.prototype.getPrinters = function (table) {
         var status    = $($(fields)[3]).find("p").html();
         var timestamp = $($(fields)[5]).find("p").html();
 
-        if(that.gpsTable[name]) {
+        if(that._gpsTable[name]) {
             printers[name] = 
             {
                 name: name,
                 lcd: lcd,
                 status: status,
                 timestamp: timestamp,
-                latitude: that.gpsTable[name].latitude,
-                longitude: that.gpsTable[name].longitude,
+                latitude: that._gpsTable[name].latitude,
+                longitude: that._gpsTable[name].longitude,
             };
         }
     }
@@ -64,14 +64,15 @@ cmuPrinters.prototype.getPrinters = function (table) {
     return printers;
 }
 
-cmuPrinters.prototype.getClosest = function(numToGet, gpsLat, gpsLong) {
+//Given n and lat & lon, return an array with the n closest printers. 
+cmuPrinters.prototype.getClosest = function(n, lat, lon) {
     var minDist = Infinity;
     var minP = undefined;
     var minPs = [];
-    for(var i = 0; i < numToGet; i++) {
+    for(var i = 0; i < n; i++) {
         for(var printer in this.printers) {
             curP = this.printers[printer];
-            curDist = Math.sqrt(Math.pow(Math.abs(gpsLat - curP.latitude), 2) + Math.pow(Math.abs(gpsLong - curP.longitude), 2));
+            curDist = Math.sqrt(Math.pow(Math.abs(lat - curP.latitude), 2) + Math.pow(Math.abs(lon - curP.longitude), 2));
             if(curDist <= minDist && !minPs.contains(curP)) {
                 minDist = curDist;
                 minP = curP;
@@ -87,6 +88,7 @@ cmuPrinters.prototype.getClosest = function(numToGet, gpsLat, gpsLong) {
     return minPs;
 }
 
+//Because right now, I'm a little lazy. 
 Array.prototype.contains = function ( query ) {
    for (i in this) {
        if (this[i] == query) return true;
