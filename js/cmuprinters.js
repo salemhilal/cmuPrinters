@@ -1,8 +1,10 @@
+// All of our printer utilities are in this object.
 function cmuPrinters(table){
     this.table = table;
     this.printers = this._getPrinters(table);
 }
 
+// Hard-coded gps locations of all the printers.
 cmuPrinters.prototype._gpsTable = {
     "prn-hou-donner-1": {latitude : 40.441838, longitude : -79.940193},
     "prn-cs-ghc3-1": {latitude : 40.443538, longitude : -79.944625},
@@ -32,6 +34,8 @@ cmuPrinters.prototype._gpsTable = {
     "prn-cl-more-1" : {latitude : 40.445155, longitude : -79.943375}
 };
 
+// Given semi-parsed HTML data, get the printer info.
+// Specifically coded to work with CMU's printer data site.
 cmuPrinters.prototype._getPrinters = function (table) {
     var printers = {};
     var oddRows  = $(table).find(".epi-rowOdd");
@@ -64,7 +68,8 @@ cmuPrinters.prototype._getPrinters = function (table) {
     return printers;
 }
 
-//Given n and lat & lon, return an array with the n closest printers. 
+// Given n and lat & lon, return an array with the n closest printers. 
+// Currently very expensive. 
 cmuPrinters.prototype.getClosest = function(n, lat, lon) {
     var minDist = Infinity;
     var minP = undefined;
@@ -88,7 +93,7 @@ cmuPrinters.prototype.getClosest = function(n, lat, lon) {
     return minPs;
 }
 
-//Because right now, I'm a little lazy. 
+// Because right now, I'm a little lazy. 
 Array.prototype.contains = function ( query ) {
    for (i in this) {
        if (this[i] == query) return true;
@@ -96,6 +101,8 @@ Array.prototype.contains = function ( query ) {
    return false;
 }
 
+// Things to be run only after the page loads.
+// i.e. load the map, create listeners, etc.
 $(document).ready(function(){
 
 
@@ -114,6 +121,11 @@ $(document).ready(function(){
         });
 
 
+    });
+
+    $("#showList").live("click", function(){
+        $("#locations").slideUp();
+        $("#printerList").slideDown();
     });
 
     //Boot up the map.

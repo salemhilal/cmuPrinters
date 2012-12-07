@@ -6,53 +6,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" media="all">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style type="text/css">
-        body {
-            padding-top: 20px;
-            padding-bottom: 40px;
-        }
-
-        /* Custom container */
-        .container-narrow {
-            margin: 0 auto;
-            max-width: 700px;
-        }
-        .container-narrow > hr {
-            margin: 30px 0;
-        }
-
-        /* Main marketing message and sign up button */
-        .jumbotron {
-            margin: 30px 0;
-            text-align: center;
-        }
-        .jumbotron h1 {
-            font-size: 72px;
-            line-height: 1;
-        }
-        .jumbotron .btn {
-            font-size: 21px;
-            padding: 14px 24px;
-        }
-
-        /* Supporting marketing content */
-        .marketing {
-            margin: 60px 0;
-        }
-        .marketing p + h4 {
-            margin-top: 28px;
-        }
-        .btn-large{
-            margin-bottom: 20px;
-        }
-        .emph{
-            color: #FF5E69;
-            margin: 0; padding: 0;
-        }
-        .gmnoprint{
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css" media="all">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -64,17 +18,17 @@
     <div class="container-narrow">
 
       <div class="masthead">
-        <ul class="nav nav-pills pull-right">
+        <!--<ul class="nav nav-pills pull-right">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
-        </ul>
+        </ul>-->
         <h3 class="muted">cmu<span class="emph">Printers</span></h3>
       </div>
 
       <hr>
 
-      <div class="jumbotron">
+      <div id="locations" class="jumbotron">
         <h1>Where are you?</h1>
         <p class="lead">Click or tap on your location on the map.</p>
         <p class="lead">Drag to move around the map.</p>
@@ -83,7 +37,11 @@
         <br />
         <br />
         <a class="btn btn-large" href="#">Use my phone</a>
-        <a class="btn btn-large btn-info" href="#">Printer List</a>
+        <a id="showList" class="btn btn-large btn-info" href="#">Printer List</a>
+      </div>
+
+      <div id="printerList" class="jumbotron">
+          <h1>Current stats</h1>
       </div>
 
       <hr>
