@@ -12,11 +12,11 @@ cmuPrinters.prototype._gpsTable = {
     "prn-cl-uc-1": {latitude: 40.443276, longitude : -79.94223, realname: "University Center"},
     "prn-cl-baker-1": {latitude : 40.441319, longitude : -79.944624, realname: "Baker Hall"},
     "prn-cl-baker-2" : {latitude : 40.441256, longitude : -79.944629, realname: "Baker 140B"},
-    "prn-cl-wean-c" : {latitude : 40.44272, longitude : -79.946145, realname: "Wean Color"},
+    "prn-cl-wean-c" : {latitude : 40.44272, longitude : -79.946145, realname: "Wean Color Printer"},
     "prn-cl-wean-1" : {latitude : 40.442730, longitude : -79.945944, realname: "Wean Hall"},
     "prn-lib-es-2" : {latitude : 40.442705, longitude : -79.945638, realname: "Eng & Sci Library 1"},
     "prn-lib-es-3" : {latitude : 40.442748, longitude : -79.945587, realname: "Eng & Sci Library 2"},
-    "prn-lib-hl1color" : {latitude : 40.441162, longitude : -79.944029, realname: "Hunt 1st Floor Color"},
+    "prn-lib-hl1color" : {latitude : 40.441162, longitude : -79.944029, realname: "Hunt 1st Floor Color Printer"},
     "prn-lib-hl1ref-1" : {latitude : 40.441174 , longitude : -79.943932, realname: "Hunt 1st Floor 1"},
     "prn-lib-hl1ref-2" : {latitude : 40.441154, longitude : -79.943878, realname: "Hunt 1st Floor 2"},
     "prn-lib-hl1ref-3" : {latitude : 40.441152, longitude : -79.943817, realname: "Hunt 1st Floor 3"},
@@ -28,8 +28,8 @@ cmuPrinters.prototype._gpsTable = {
     "prn-cl-cyert-1" : {latitude : 40.44424, longitude : -79.943814, realname: "Cyert Hall"},
     "prn-cl-ww-1" : {latitude : 40.442724, longitude : -79.94099, realname: "West Wing Cluster"},
     "prn-gsia-ww-1" : {latitude : 40.442716, longitude : -79.940885, realname: "Tepper"},
-    "prn-cl-cfa-1" : {latitude : 40.44173, longitude : -79.942854, realname: "CFA"},
-    "prn-cl-cfa-c" : {latitude : 40.44155, longitude : -79.942999, realname: "CFA Color"},
+    "prn-cl-cfa-1" : {latitude : 40.44173, longitude : -79.942854, realname: "CFA Printer"},
+    "prn-cl-cfa-c" : {latitude : 40.44155, longitude : -79.942999, realname: "CFA Color Printer"},
     "prn-hou-mudge-1" : {latitude : 40.446943, longitude : -79.942672, realname: "Mudge House"},
     "prn-cl-more-1" : {latitude : 40.445155, longitude : -79.943375, realname: "Morewood Gardens"}
 };
@@ -99,14 +99,20 @@ function listPrinters(prnt){
     var listTemplate = "<tr class='<%=status%>'><td><%=number%></td><td><%=name%></td><td><%=detail%></td></tr>"
     for(p in printers){
         var status;
+        var detail = printers[p].status;
+
         if(printers[p].status.indexOf("ready") != -1)
-            status = "success"
-        else if (printers[p].status.indexOf("warning") != -1)
-            status = "warning"
-        else if (printers[p].status.indexOf("offline") != -1)
-            status = "error"
-        else
             status = "info"
+        else if (printers[p].status.indexOf("warning") != -1 
+            || printers[p].status.indexOf("low") != -1)
+            status = "warning"
+        else if (printers[p].status.indexOf("offline") != -1
+            || printers[p].status.indexOf("crashed") != -1)
+            status = "error"
+        else{
+            status = "warning",
+            detail = "no message from printer"
+        }
         var templated = _.template(listTemplate, {
             number : i,
             name   : prnt._gpsTable[p].realname,
