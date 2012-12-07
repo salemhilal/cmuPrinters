@@ -125,12 +125,11 @@ function listPrinters(prnt){
 }
 
 // Because right now, I'm a little lazy. 
-Array.prototype.contains = function contains(arr, value) {
-    var i = arr.length;
-    while (i--) {
-        if (arr[i] === value) return true;
-    }
-    return false;
+Array.prototype.contains = function (val) {
+   for (var i in this) {
+       if (JSON.stringify(this[i]) == JSON.stringify(val)) return true;
+   }
+   return false;
 }
 
 var PrinterUtil;
