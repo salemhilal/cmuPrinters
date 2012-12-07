@@ -137,6 +137,14 @@ var PrinterUtil;
 // i.e. load the map, create listeners, etc.
 $(document).ready(function(){
 
+    //Geolocation patch.
+    var nop = function() { };
+    if (!navigator.geolocation) {
+        navigator.geolocation = {};
+    }
+    if (!navigator.geolocation.getCurrentPosition) {
+        navigator.geolocation.getCurrentPosition = nop;
+    }
 
 
     $.get("http://clusters.andrew.cmu.edu/printerstats/", function(data){
@@ -176,12 +184,48 @@ $(document).ready(function(){
         $("#printerList").slideDown();
     });
 
+    $("#closeList").live("click", function(){
+        $("#locations").slideDown();
+        $("#printerList").slideUp();
+    });
+
+
+
     //Boot up the map.
     var cmuMap = new google.maps.Map(document.getElementById('cmuMap'), {
         disableDefaultUI: true,
         center: new google.maps.LatLng(40.44317485343779, -79.94323968887329),
         zoom: 17,
         mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    $("#findMe").live("click", function(){
+        console.log("going...");
+        navigator.geolocation.getCurrentPosition(function(position) {
+            console.log("going.......");
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            cmuMap.setCenter(new google.maps.LatLng(lat, lng));
+
+            var ready = PrinterUtil.getClosest(3, lat, lng, "ready");
+            var listTemplate = "<tr class='info'><td><%=number%></td><td><%=name%></td><td><%=detail%></td></tr>"
+
+            $("#resultPrinters").html("");
+
+            console.log(ready);
+            for(var i=0; i<ready.length; i++){
+                console.log(i);
+                var templated = _.template(listTemplate,{
+                    number: i+1,
+                    name: PrinterUtil._gpsTable[ready[i].name].realname,
+                    detail: ready[i].status
+                });
+                $("#resultPrinters").append(templated);
+            }
+
+            $("#dataModal").modal();
+
+        });
     });
 
     //Resizes the map.

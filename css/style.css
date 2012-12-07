@@ -50,3 +50,9 @@ body {
 th{
     border-bottom: 3px solid #DDDDDD;
 }
+
+#closeListBox {
+    position: fixed;
+    right:30px;
+    bottom: 10px;
+}

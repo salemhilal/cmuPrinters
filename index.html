@@ -29,7 +29,7 @@
         <div id="printerList" class="jumbotron">
             <h1>Current stats</h1>
             <hr>
-            <table class="table  table-bordered ">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>#</th><th>Printer</th><th>Status</th>
@@ -39,6 +39,9 @@
                     
                 </tbody>
             </table>
+            <div id="closeListBox">
+                <a id="closeList" class="btn btn-large btn-info" href="#">Back</a>
+            </div>
         </div>
 
         <div id="locations" class="jumbotron">
@@ -50,7 +53,7 @@
         <hr>
 
         <!-- Buttons -->
-        <a class="btn btn-large" href="#">Use my phone</a>
+        <a id="findMe" class="btn btn-large" href="#">Find my location</a>
         <a id="showList" class="btn btn-large btn-info" href="#">Printer List</a>
         </div>
 
@@ -86,7 +89,7 @@
             <h3>Try one of these.</h3>
         </div>
         <div class="modal-body">
-            <table class="table">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <td>#</td><td>Printer</td><td>Status</td>
