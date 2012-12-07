@@ -6,32 +6,32 @@ function cmuPrinters(table){
 
 // Hard-coded gps locations of all the printers.
 cmuPrinters.prototype._gpsTable = {
-    "prn-hou-donner-1": {latitude : 40.441838, longitude : -79.940193},
-    "prn-cs-ghc3-1": {latitude : 40.443538, longitude : -79.944625},
-    "prn-cs-ghc5-1": {latitude : 40.443305, longitude : -79.94456},
-    "prn-cl-uc-1": {latitude: 40.443276, longitude : -79.94223},
-    "prn-cl-baker-1": {latitude : 40.441319, longitude : -79.944624},
-    "prn-cl-baker-2" : {latitude : 40.441256, longitude : -79.944629},
-    "prn-cl-wean-c" : {latitude : 40.44272, longitude : -79.946145},
-    "prn-cl-wean-1" : {latitude : 40.442730, longitude : -79.945944},
-    "prn-lib-es-2" : {latitude : 40.442705, longitude : -79.945638},
-    "prn-lib-es-3" : {latitude : 40.442748, longitude : -79.945587},
-    "prn-lib-hl1color" : {latitude : 40.441162, longitude : -79.944029},
-    "prn-lib-hl1ref-1" : {latitude : 40.441174 , longitude : -79.943932},
-    "prn-lib-hl1ref-2" : {latitude : 40.441154, longitude : -79.943878},
-    "prn-lib-hl1ref-3" : {latitude : 40.441152, longitude : -79.943817},
-    "prn-lib-hl2-1" : {latitude : 40.441148, longitude : -79.943742},
-    "prn-lib-hl3-1" : {latitude : 40.441152, longitude : -79.943659},
-    "prn-lib-hl4arts-1" : {latitude : 40.441109, longitude : -79.943629},
-    "prn-lib-hl4arts-2" : {latitude : 40.441101, longitude : -79.94354},
-    "prn-lib-hl4music-1" : {latitude : 40.441052, longitude : -79.943492},
-    "prn-cl-cyert-1" : {latitude : 40.44424, longitude : -79.943814},
-    "prn-cl-ww-1" : {latitude : 40.442724, longitude : -79.94099},
-    "prn-gsia-ww-1" : {latitude : 40.442716, longitude : -79.940885},
-    "prn-cl-cfa-1" : {latitude : 40.44173, longitude : -79.942854},
-    "prn-cl-cfa-c" : {latitude : 40.44155, longitude : -79.942999},
-    "prn-hou-mudge-1" : {latitude : 40.446943, longitude : -79.942672},
-    "prn-cl-more-1" : {latitude : 40.445155, longitude : -79.943375}
+    "prn-hou-donner-1": {latitude : 40.441838, longitude : -79.940193, realname: "Donner House"},
+    "prn-cs-ghc3-1": {latitude : 40.443538, longitude : -79.944625, realname: "Gates 3rd Floor"},
+    "prn-cs-ghc5-1": {latitude : 40.443305, longitude : -79.94456, realname: "Gates 5th Floor"},
+    "prn-cl-uc-1": {latitude: 40.443276, longitude : -79.94223, realname: "University Center"},
+    "prn-cl-baker-1": {latitude : 40.441319, longitude : -79.944624, realname: "Baker Hall"},
+    "prn-cl-baker-2" : {latitude : 40.441256, longitude : -79.944629, realname: "Baker 140B"},
+    "prn-cl-wean-c" : {latitude : 40.44272, longitude : -79.946145, realname: "Wean Color"},
+    "prn-cl-wean-1" : {latitude : 40.442730, longitude : -79.945944, realname: "Wean Hall"},
+    "prn-lib-es-2" : {latitude : 40.442705, longitude : -79.945638, realname: "Eng & Sci Library 1"},
+    "prn-lib-es-3" : {latitude : 40.442748, longitude : -79.945587, realname: "Eng & Sci Library 2"},
+    "prn-lib-hl1color" : {latitude : 40.441162, longitude : -79.944029, realname: "Hunt 1st Floor Color"},
+    "prn-lib-hl1ref-1" : {latitude : 40.441174 , longitude : -79.943932, realname: "Hunt 1st Floor 1"},
+    "prn-lib-hl1ref-2" : {latitude : 40.441154, longitude : -79.943878, realname: "Hunt 1st Floor 2"},
+    "prn-lib-hl1ref-3" : {latitude : 40.441152, longitude : -79.943817, realname: "Hunt 1st Floor 3"},
+    "prn-lib-hl2-1" : {latitude : 40.441148, longitude : -79.943742, realname: "Hunt 2nd Floor"},
+    "prn-lib-hl3-1" : {latitude : 40.441152, longitude : -79.943659, realname: "Hunt 3rd Floor"},
+    "prn-lib-hl4arts-1" : {latitude : 40.441109, longitude : -79.943629, realname: "Hunt 4th Floor 1"},
+    "prn-lib-hl4arts-2" : {latitude : 40.441101, longitude : -79.94354, realname: "Hunt 4th Floor 2"},
+    "prn-lib-hl4music-1" : {latitude : 40.441052, longitude : -79.943492, realname: "Hunt 4th Floor Music"},
+    "prn-cl-cyert-1" : {latitude : 40.44424, longitude : -79.943814, realname: "Cyert Hall"},
+    "prn-cl-ww-1" : {latitude : 40.442724, longitude : -79.94099, realname: "West Wing Cluster"},
+    "prn-gsia-ww-1" : {latitude : 40.442716, longitude : -79.940885, realname: "Tepper"},
+    "prn-cl-cfa-1" : {latitude : 40.44173, longitude : -79.942854, realname: "CFA"},
+    "prn-cl-cfa-c" : {latitude : 40.44155, longitude : -79.942999, realname: "CFA Color"},
+    "prn-hou-mudge-1" : {latitude : 40.446943, longitude : -79.942672, realname: "Mudge House"},
+    "prn-cl-more-1" : {latitude : 40.445155, longitude : -79.943375, realname: "Morewood Gardens"}
 };
 
 // Given semi-parsed HTML data, get the printer info.
@@ -70,7 +70,7 @@ cmuPrinters.prototype._getPrinters = function (table) {
 
 // Given n and lat & lon, return an array with the n closest printers. 
 // Currently very expensive. 
-cmuPrinters.prototype.getClosest = function(n, lat, lon) {
+cmuPrinters.prototype.getClosest = function(n, lat, lon, status) {
     var minDist = Infinity;
     var minP = undefined;
     var minPs = [];
@@ -78,7 +78,7 @@ cmuPrinters.prototype.getClosest = function(n, lat, lon) {
         for(var printer in this.printers) {
             curP = this.printers[printer];
             curDist = Math.sqrt(Math.pow(Math.abs(lat - curP.latitude), 2) + Math.pow(Math.abs(lon - curP.longitude), 2));
-            if(curDist <= minDist && !minPs.contains(curP)) {
+            if(curDist <= minDist && !minPs.contains(curP) & this.printers[printer].status.indexOf(status) != -1) {
                 minDist = curDist;
                 minP = curP;
             }
@@ -91,6 +91,31 @@ cmuPrinters.prototype.getClosest = function(n, lat, lon) {
     }
 
     return minPs;
+}
+
+function listPrinters(prnt){
+    var i = 1;
+    var printers = prnt.printers;
+    var listTemplate = "<tr class='<%=status%>'><td><%=number%></td><td><%=name%></td><td><%=detail%></td></tr>"
+    for(p in printers){
+        var status;
+        if(printers[p].status.indexOf("ready") != -1)
+            status = "success"
+        else if (printers[p].status.indexOf("warning") != -1)
+            status = "warning"
+        else if (printers[p].status.indexOf("offline") != -1)
+            status = "error"
+        else
+            status = "info"
+        var templated = _.template(listTemplate, {
+            number : i,
+            name   : prnt._gpsTable[p].realname,
+            detail : printers[p].status,
+            status : status
+        });
+        $("#printers").append(templated);
+        i++;
+    }
 }
 
 // Because right now, I'm a little lazy. 
@@ -110,6 +135,9 @@ $(document).ready(function(){
     $.get("http://clusters.andrew.cmu.edu/printerstats/", function(data){
         var bodyText = $(data.responseText);
         var PrinterUtil = new cmuPrinters(bodyText);
+        console.log(PrinterUtil.printers);
+
+        listPrinters(PrinterUtil);
 
         google.maps.event.addListener(cmuMap, 'click', function(event) {
             console.log('Point.X.Y: ' + event.latLng);

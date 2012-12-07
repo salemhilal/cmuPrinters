@@ -299,14 +299,14 @@ table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span
 .table td.span10,.table th.span10{float:none;width:764px;margin-left:0;}
 .table td.span11,.table th.span11{float:none;width:844px;margin-left:0;}
 .table td.span12,.table th.span12{float:none;width:924px;margin-left:0;}
-.table tbody tr.success td{background-color:#3cb521;}
-.table tbody tr.error td{background-color:#cd0200;}
-.table tbody tr.warning td{background-color:#d47500;}
-.table tbody tr.info td{background-color:#3399f3;}
-.table-hover tbody tr.success:hover td{background-color:#359f1d;}
-.table-hover tbody tr.error:hover td{background-color:#b40200;}
-.table-hover tbody tr.warning:hover td{background-color:#bb6700;}
-.table-hover tbody tr.info:hover td{background-color:#1b8df2;}
+.table tbody tr.success td{background-color: #dff0d8;}
+.table tbody tr.error td{background-color: #f2dede;}
+.table tbody tr.warning td{background-color: #fcf8e3;}
+.table tbody tr.info td{background-color: #d9edf7;}
+.table-hover tbody tr.success:hover td{background-color: #d0e9c6;}
+.table-hover tbody tr.error:hover td{background-color: #ebcccc;}
+.table-hover tbody tr.warning:hover td{background-color: #faf2cc;}
+.table-hover tbody tr.info:hover td{background-color: #c4e3f3;}
 [class^="icon-"],[class*=" icon-"]{display:inline-block;width:14px;height:14px;*margin-right:.3em;line-height:14px;vertical-align:text-top;background-image:url("../img/glyphicons-halflings.png");background-position:14px 14px;background-repeat:no-repeat;margin-top:1px;}
 .icon-white,.nav-pills>.active>a>[class^="icon-"],.nav-pills>.active>a>[class*=" icon-"],.nav-list>.active>a>[class^="icon-"],.nav-list>.active>a>[class*=" icon-"],.navbar-inverse .nav>.active>a>[class^="icon-"],.navbar-inverse .nav>.active>a>[class*=" icon-"],.dropdown-menu>li>a:hover>[class^="icon-"],.dropdown-menu>li>a:hover>[class*=" icon-"],.dropdown-menu>.active>a>[class^="icon-"],.dropdown-menu>.active>a>[class*=" icon-"],.dropdown-submenu:hover>a>[class^="icon-"],.dropdown-submenu:hover>a>[class*=" icon-"]{background-image:url("../img/glyphicons-halflings-white.png");}
 .icon-glass{background-position:0 0;}

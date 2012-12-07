@@ -17,18 +17,32 @@
 <body>
     <div class="container-narrow">
 
-      <div class="masthead">
+        <div class="masthead">
         <!--<ul class="nav nav-pills pull-right">
           <li class="active"><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
         </ul>-->
         <h3 class="muted">cmu<span class="emph">Printers</span></h3>
-      </div>
+        </div>
 
-      <hr>
+        <hr>
 
-      <div id="locations" class="jumbotron">
+        <div id="printerList" class="jumbotron">
+            <h1>Current stats</h1>
+            <table class="table  table-bordered ">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Printer</th><th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="printers">
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div id="locations" class="jumbotron">
         <h1>Where are you?</h1>
         <p class="lead">Click or tap on your location on the map.</p>
         <p class="lead">Drag to move around the map.</p>
@@ -38,11 +52,9 @@
         <br />
         <a class="btn btn-large" href="#">Use my phone</a>
         <a id="showList" class="btn btn-large btn-info" href="#">Printer List</a>
-      </div>
+        </div>
 
-      <div id="printerList" class="jumbotron">
-          <h1>Current stats</h1>
-      </div>
+     
 
       <hr>
 
