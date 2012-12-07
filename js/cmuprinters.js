@@ -94,11 +94,12 @@ cmuPrinters.prototype.getClosest = function(n, lat, lon) {
 }
 
 // Because right now, I'm a little lazy. 
-Array.prototype.contains = function ( query ) {
-   for (i in this) {
-       if (this[i] == query) return true;
-   }
-   return false;
+Array.prototype.contains = function contains(arr, value) {
+    var i = arr.length;
+    while (i--) {
+        if (arr[i] === value) return true;
+    }
+    return false;
 }
 
 // Things to be run only after the page loads.
