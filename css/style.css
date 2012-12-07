@@ -40,9 +40,13 @@ body {
     margin-bottom: 20px;
 }
 .emph{
-    color: #FF5E69;
+    color: #B92C2C;
     margin: 0; padding: 0;
 }
 .gmnoprint{
     display: none;
+}
+
+th{
+    border-bottom: 3px solid #DDDDDD;
 }

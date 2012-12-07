@@ -78,7 +78,7 @@ cmuPrinters.prototype.getClosest = function(n, lat, lon, status) {
         for(var printer in this.printers) {
             curP = this.printers[printer];
             curDist = Math.sqrt(Math.pow(Math.abs(lat - curP.latitude), 2) + Math.pow(Math.abs(lon - curP.longitude), 2));
-            if(curDist <= minDist && !minPs.contains(curP) & this.printers[printer].status.indexOf(status) != -1) {
+            if(curDist <= minDist && !minPs.contains(curP) && this.printers[printer].status.indexOf(status) != -1) {
                 minDist = curDist;
                 minP = curP;
             }
@@ -133,28 +133,42 @@ Array.prototype.contains = function contains(arr, value) {
     return false;
 }
 
+var PrinterUtil;
 // Things to be run only after the page loads.
 // i.e. load the map, create listeners, etc.
 $(document).ready(function(){
 
 
+
     $.get("http://clusters.andrew.cmu.edu/printerstats/", function(data){
         var bodyText = $(data.responseText);
-        var PrinterUtil = new cmuPrinters(bodyText);
-        console.log(PrinterUtil.printers);
+         PrinterUtil = new cmuPrinters(bodyText);
 
         listPrinters(PrinterUtil);
 
         google.maps.event.addListener(cmuMap, 'click', function(event) {
-            console.log('Point.X.Y: ' + event.latLng);
-            console.log(event);
-            console.log(event.latLng);
             var lat = event.latLng["$a"];
             var lng = event.latLng["ab"];
 
-            console.log(PrinterUtil.getClosest(3, lat, lng));
-        });
+            var ready = PrinterUtil.getClosest(3, lat, lng, "ready");
+            var listTemplate = "<tr class='info'><td><%=number%></td><td><%=name%></td><td><%=detail%></td></tr>"
 
+            $("#resultPrinters").html("");
+
+            console.log(ready);
+            for(var i=0; i<ready.length; i++){
+                console.log(i);
+                var templated = _.template(listTemplate,{
+                    number: i+1,
+                    name: PrinterUtil._gpsTable[ready[i].name].realname,
+                    detail: ready[i].status
+                });
+                $("#resultPrinters").append(templated);
+            }
+
+            $("#dataModal").modal();
+
+        });
 
     });
 
