@@ -56,3 +56,45 @@ th{
     right:30px;
     bottom: 10px;
 }
+#cmuMap{
+    height: 375px;
+    width: 100%;
+}
+
+@media (max-width: 767px) { 
+    #cmuMap{
+        height:300px;
+    }
+    .jumbotron h1{
+        font-size:36px;
+    }
+    p.lead{
+        font-size: 16px;
+        margin-bottom: 5px;
+        line-height: 18px;
+    }
+    .jumbotron{
+        margin: 10px 0;
+    }
+    .jumbotron .btn {
+        font-size: 16px;
+        padding: 5px 10px;
+    }
+    .marketing{
+        margin: 30px 0;
+    }
+    .toolbar{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        padding: 5px;
+        background: #EEEEEE;
+        
+    }
+    body{
+        margin-bottom: 10px;
+    }
+
+}

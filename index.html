@@ -48,28 +48,36 @@
         <h1>Where are you?</h1>
         <p class="lead">Click or tap on your location on the map.</p>
         <p class="lead">Drag to move around the map.</p>
+        <hr class="visible-phone">
         <!--img src="img/map.png" class="img-rounded"></img-->
-        <div id="cmuMap" style="width: 100%; height: 375px;"></div> 
+        <div id="cmuMap"></div> 
         <hr>
 
         <!-- Buttons -->
-        <a id="findMe" class="btn btn-large" href="#">Find my location</a>
-        <a id="showList" class="btn btn-large btn-info" href="#">Printer List</a>
+        <div class="hidden-phone">
+            <a id="findMe" class="btn btn-large" href="#">Find my location</a>
+            <a id="showList" class="btn btn-large btn-info" href="#">Printer List</a>    
+        </div>
+        <div class="hidden-desktop hidden-tablet toolbar">
+            <a id="findMe" class="btn" href="#">Find my location</a>
+            <a id="showList" class="btn btn-info" href="#">Printer List</a>    
+        </div>
+        
         </div>
 
      
 
-      <hr>
+      <hr class="hidden-phone">
 
       <div class="row-fluid marketing">
         <div class="span6">
-          <h4>CmuPrinters</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          <h4>cmu<span class='emph'>Printers</span></h4>
+          <p>We'd like to make it easy to print on campus again. Tell us where you are, and we'll tell you where to head.</p>
         </div>
 
         <div class="span6">
-          <h4>Printing Stuff</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+          <h4>Easy. Awesome.</h4>
+          <p>With features like geolocation and a printer status list, cmuPrinters helps you get your paper in time for class.</p>
 
         </div>
       </div>
